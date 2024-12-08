@@ -27,3 +27,6 @@ app.use("/user/", userRoute);
 app.listen(8000, () => {
   console.log("server is runing");
 });
+app.get("/health", (req, res) => {
+  res.status(200).send("Server is running");
+});
