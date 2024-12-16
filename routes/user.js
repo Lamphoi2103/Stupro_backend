@@ -8,5 +8,10 @@ router.get(
   middlewareAthentic.verifyTokenAndAdminAuth,
   userController.getAllUser
 );
+router.get(
+  "/:id",
+  middlewareAthentic.verifyTokenAndAdminAuth,
+  userController.getUserById
+);
 
 module.exports = router;

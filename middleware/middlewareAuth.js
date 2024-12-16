@@ -18,7 +18,7 @@ const middlewareAthentic = {
   },
   verifyTokenAndAdminAuth: (req, res, next) => {
     middlewareAthentic.verifyToken(req, res, () => {
-      if (req.user.role == 2) {
+      if (req.user.role == 2 || req.user.id == req.params.id) {
         next();
       } else {
         res.status(403).json("bạn không đủ quyền");

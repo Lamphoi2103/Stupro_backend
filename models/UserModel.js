@@ -21,7 +21,6 @@ const userSchema = new mongoose.Schema(
     },
     studentID: {
       type: String,
-      required: true,
       unique: true,
     },
     birthday: {

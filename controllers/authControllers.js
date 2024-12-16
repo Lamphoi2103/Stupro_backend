@@ -22,7 +22,6 @@ const authController = {
       subject: "Mã xác thực của bạn",
       text: `Mã xác thực của bạn là: ${verificationCode}, có thời hạn trong vòng 10 phút`,
     };
-
     try {
       await transporter.sendMail(mailOptions);
     } catch (error) {
@@ -33,12 +32,11 @@ const authController = {
   // register
   registerUser: async (req, res) => {
     try {
-      const { username, email, password, schoolID, studentID } = req.body;
+      const { username, email, password } = req.body;
       const existingUser = await UserModel.findOne({ email });
       if (existingUser) {
         return res.status(400).json({ error: "Email đã tồn tại" });
       }
-
       const verificationCode = crypto.randomInt(100000, 999999).toString();
       const expirationTime = Date.now() + 10 * 60 * 1000;
       const verificationExpire = expirationTime;
@@ -47,8 +45,6 @@ const authController = {
       const newUser = new UserModel({
         username,
         email,
-        schoolID,
-        studentID,
         password: hashedPassword,
         verificationCode,
         verificationExpire,
