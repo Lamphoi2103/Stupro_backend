@@ -13,5 +13,6 @@ router.get(
   middlewareAthentic.verifyTokenAndAdminAuth,
   userController.getUserById
 );
+router.put("/school/:userID", userController.editSchoolUser);
 
 module.exports = router;

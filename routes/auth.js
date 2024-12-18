@@ -4,8 +4,8 @@ const middlewareAthentic = require("../middleware/middlewareAuth");
 const router = require("express").Router();
 
 router.post("/register", authController.registerUser);
-router.post("/verify", authController.verifyUser);
-router.post("/send-code", authController.sendVerificationCode);
+router.post("/verify/:userID", authController.verifyUser);
+router.post("/send-code/:userID", authController.sendVerificationCode);
 router.post("/login", authController.loginUser);
 router.post("/refresh", authController.requestRefreshToken);
 router.post("/reset-password", authController.resetPassword);

@@ -53,6 +53,7 @@ const authController = {
       await authController.sendVerificationEmail(email, verificationCode);
       res.status(200).json({
         message: "Đăng ký thành công! Vui lòng kiểm tra email để xác thực.",
+        userId: newUser._id,
       });
     } catch (e) {
       console.error(e);
@@ -62,9 +63,16 @@ const authController = {
   // refesh code xác thực
   sendVerificationCode: async (req, res) => {
     try {
+      // const { email } = req.body;
+      // const user = await UserModel.findOne({ email });
+      const { userID } = req.params;
       const { email } = req.body;
-      const user = await UserModel.findOne({ email });
-
+      let user;
+      if (email) {
+        user = await UserModel.findOne({ email });
+      } else if (userID) {
+        user = await UserModel.findById(userID);
+      }
       if (!user) {
         return res
           .status(400)
@@ -79,7 +87,10 @@ const authController = {
       await user.save();
 
       // Gửi email với mã xác thực mới
-      await authController.sendVerificationEmail(email, newVerificationCode);
+      await authController.sendVerificationEmail(
+        user.email,
+        newVerificationCode
+      );
 
       res
         .status(200)
@@ -92,8 +103,9 @@ const authController = {
   // xác thực code
   verifyUser: async (req, res) => {
     try {
-      const { email, verificationCode } = req.body;
-      const user = await UserModel.findOne({ email });
+      const { userID } = req.params;
+      const { verificationCode } = req.body;
+      const user = await UserModel.findById(userID);
       if (!user) {
         return res
           .status(400)

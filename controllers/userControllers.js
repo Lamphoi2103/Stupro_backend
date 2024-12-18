@@ -31,5 +31,33 @@ const userController = {
       res.status(500).json(error);
     }
   },
+
+  editSchoolUser: async (req, res) => {
+    try {
+      const { userID } = req.params;
+      const { schoolID, studentID } = req.body;
+      if (!schoolID || !studentID) {
+        return res
+          .status(400)
+          .json({ error: "Trường và Student ID là bắt buộc." });
+      }
+      const user = await UserModel.findById(userID);
+      if (!user) {
+        return res.status(404).json({ error: "Không tìm thấy người dùng." });
+      }
+      user.schoolID = schoolID;
+      user.studentID = studentID;
+      await user.save();
+      res.status(200).json({
+        message: "Cập nhật trường và Student ID thành công.",
+        user: {
+          schoolID: user.schoolID,
+          studentID: user.studentID,
+        },
+      });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
 module.exports = userController;
