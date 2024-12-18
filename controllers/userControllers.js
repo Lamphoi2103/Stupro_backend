@@ -59,5 +59,48 @@ const userController = {
       res.status(500).json(error);
     }
   },
+  // editImage: async (req, res) => {
+  //   try {
+  //     // Lấy đường dẫn ảnh từ req.files
+  //     const avatar = req.files.avatar ? req.files.avatar[0].path : null;
+  //     const backgroundImage = req.files.backgroundImage
+  //       ? req.files.backgroundImage[0].path
+  //       : null;
+
+  //     // Kiểm tra xem có ít nhất một ảnh được gửi lên không
+  //     if (!avatar && !backgroundImage) {
+  //       return res.status(400).json({
+  //         message:
+  //           "Vui lòng tải lên ít nhất một ảnh (avatar hoặc background image).",
+  //       });
+  //     }
+  //     const userId = req.params.id;
+
+  //     // Tìm người dùng trong cơ sở dữ liệu
+  //     const user = await UserModel.findById(userId);
+  //     if (!user) {
+  //       return res.status(404).json({ message: "Người dùng không tồn tại." });
+  //     }
+
+  //     // Cập nhật ảnh cho người dùng
+  //     if (avatar) user.avatar = avatar;
+  //     if (backgroundImage) user.backgroundImage = backgroundImage;
+
+  //     // Lưu thay đổi vào cơ sở dữ liệu
+  //     const updatedUser = await user.save();
+
+  //     // Trả về phản hồi
+  //     res.status(200).json({
+  //       message: "Cập nhật ảnh thành công.",
+  //       user: updatedUser,
+  //     });
+  //   } catch (error) {
+  //     console.error("Lỗi khi cập nhật ảnh:", error);
+  //     res.status(500).json({
+  //       message: "Đã xảy ra lỗi trong quá trình cập nhật ảnh.",
+  //       error: error.message,
+  //     });
+  //   }
+  // },
 };
 module.exports = userController;

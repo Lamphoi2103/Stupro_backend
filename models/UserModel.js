@@ -30,11 +30,15 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 1,
     },
-    avarta: {
+    avatar: {
       type: String,
+      default:
+        "https://res.cloudinary.com/dm5boojuu/image/upload/v1734536116/default-avatar-icon-of-social-media-user-vector_irdhng.jpg",
     },
-    backgroundImg: {
+    backgroundImage: {
       type: String,
+      default:
+        "https://res.cloudinary.com/dm5boojuu/image/upload/v1734536209/images_ayabqu.jpg",
     },
     isVerified: {
       type: Boolean,

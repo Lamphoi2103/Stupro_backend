@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
+const schoolRoute = require("./routes/school");
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.json());
 //Routes
 app.use("/auth", authRoute);
 app.use("/user/", userRoute);
+app.use("/school/", schoolRoute);
 
 app.listen(8000, () => {
   console.log("server is runing");
